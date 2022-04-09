@@ -9,8 +9,10 @@ router.post('/update', userCtl.userUpdate);
 
 router.post('/del', userCtl.userDel);
 
-router.post('/find', userCtl.userFind);
+router.get('/find', userCtl.userFind);
 
-router.post('/find/:id', userCtl.userFindOne);
+router.get('/find/:id', userCtl.userFindOne);
+
+router.post('/login', userCtl.login);
 
 module.exports = router;

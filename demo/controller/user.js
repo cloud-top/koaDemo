@@ -1,5 +1,6 @@
 const { user } = require('../modules');
 const crud = require('./crudUtil');
+const jwt = require('jsonwebtoken');
 
 const userAdd = async (ctx) => {
   let { username = '', pwd = '' } = ctx.request.body;
@@ -37,6 +38,21 @@ const userFindOne = async (ctx) => {
     ctx
   );
 };
+const login = async (ctx) => {
+  let user = { username: 'list', pwd: '123' };
+  let token = jwt.sign(
+    {
+      username: user.username,
+    },
+    'mydemo',
+    {
+      expiresIn: 3600 * 24 * 7,
+    }
+  );
+  ctx.body = {
+    token,
+  };
+};
 
 module.exports = {
   userAdd,
@@ -44,4 +60,5 @@ module.exports = {
   userDel,
   userFind,
   userFindOne,
+  login,
 };
